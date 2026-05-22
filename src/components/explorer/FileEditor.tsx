@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Save, X, FileText } from 'lucide-react';
-import { FileSystemNode } from '../../types';
+import type { FileSystemNode } from '../../types';
 
 interface FileEditorProps {
   file: FileSystemNode;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronRight, ChevronDown, Folder, FileText } from 'lucide-react';
-import { FileSystemNode } from '../../types';
+import { ChevronRight, ChevronDown, Folder } from 'lucide-react';
+import type { FileSystemNode } from '../../types';
 import { cn } from '../../utils';
 
 interface FolderTreeProps {

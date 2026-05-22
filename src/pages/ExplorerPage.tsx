@@ -4,7 +4,7 @@ import { MainPanel } from '../components/layout/MainPanel';
 import { FileEditor } from '../components/explorer/FileEditor';
 import { InputModal, ConfirmModal } from '../components/shared/Modal';
 import { useFileSystem } from '../hooks/useFileSystem';
-import { FileSystemNode, ModalState } from '../types';
+import type { FileSystemNode, ModalState } from '../types';
 
 export const ExplorerPage: React.FC = () => {
   const {

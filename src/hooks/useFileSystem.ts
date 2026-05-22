@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { FileSystemNode, FileType } from '../types';
+import type { FileSystemNode, FileType } from '../types';
 
 const STORAGE_KEY = 'mini_file_explorer_data';
 

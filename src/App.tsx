@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ExplorerPage } from './pages/ExplorerPage';
 
 function App() {

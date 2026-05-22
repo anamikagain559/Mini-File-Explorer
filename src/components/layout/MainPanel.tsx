@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileSystemNode, FileType, ModalState } from '../../types';
+import type { FileSystemNode, FileType, ModalState } from '../../types';
 import { ChevronRight, Folder, FileText, MoreVertical, Edit2, Trash2, FolderPlus, FilePlus } from 'lucide-react';
 import { cn } from '../../utils';
 

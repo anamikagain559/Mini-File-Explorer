@@ -1,6 +1,6 @@
 import React from 'react';
 import { FolderTree } from '../explorer/FolderTree';
-import { FileSystemNode } from '../../types';
+import type { FileSystemNode } from '../../types';
 import { HardDrive } from 'lucide-react';
 
 interface SidebarProps {
