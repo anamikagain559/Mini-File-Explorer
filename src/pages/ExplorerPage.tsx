@@ -21,6 +21,7 @@ export const ExplorerPage: React.FC = () => {
 
   const [currentFolderId, setCurrentFolderId] = useState<string>('root');
   const [editingFileId, setEditingFileId] = useState<string | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   const [modalState, setModalState] = useState<ModalState>({
     isOpen: false,
@@ -87,11 +88,13 @@ export const ExplorerPage: React.FC = () => {
   const targetNode = modalState.targetId ? getNode(modalState.targetId) : null;
 
   return (
-    <div className="flex h-screen bg-background text-foreground overflow-hidden">
+    <div className="flex h-[100dvh] bg-background text-foreground overflow-hidden">
       <Sidebar 
         nodes={nodes} 
         currentFolderId={currentFolderId} 
         onSelectFolder={handleNavigate} 
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
       />
       
       <div className="flex-1 flex flex-col min-w-0 relative">
@@ -101,12 +104,13 @@ export const ExplorerPage: React.FC = () => {
           onNavigate={handleNavigate}
           onOpenFile={handleOpenFile}
           openModal={openModal}
+          onToggleSidebar={() => setIsSidebarOpen(true)}
         />
 
-        {/* File Editor Overlay (Sliding from bottom or covering right part) */}
+        {/* File Editor Overlay */}
         {editingFile && (
-          <div className="absolute inset-0 z-20 bg-background/50 backdrop-blur-sm p-4 md:p-8 flex justify-center items-center">
-            <div className="w-full max-w-4xl h-[80vh] shadow-2xl animate-in slide-in-from-bottom-8 duration-300 rounded-lg">
+          <div className="absolute inset-0 z-20 bg-background/50 backdrop-blur-sm p-0 md:p-8 flex justify-center items-center">
+            <div className="w-full h-full md:max-w-4xl md:h-[80vh] shadow-2xl animate-in slide-in-from-bottom-8 duration-300 md:rounded-lg overflow-hidden">
               <FileEditor
                 file={editingFile}
                 onSave={updateFileContent}

@@ -56,7 +56,7 @@ export const useFileSystem = () => {
 
   const deleteNode = useCallback((id: string) => {
     setNodes((prev) => {
-      // Find all descendants to delete
+    
       const idsToDelete = new Set<string>([id]);
       
       let currentSize = 0;

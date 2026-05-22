@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FileSystemNode, FileType, ModalState } from '../../types';
-import { ChevronRight, Folder, FileText, MoreVertical, Edit2, Trash2, FolderPlus, FilePlus } from 'lucide-react';
+import { ChevronRight, Folder, FileText, MoreVertical, Edit2, Trash2, FolderPlus, FilePlus, Menu } from 'lucide-react';
 import { cn } from '../../utils';
 
 interface MainPanelProps {
@@ -9,6 +9,7 @@ interface MainPanelProps {
   onNavigate: (id: string) => void;
   onOpenFile: (file: FileSystemNode) => void;
   openModal: (type: ModalState['type'], targetId: string | null, fileType?: FileType) => void;
+  onToggleSidebar: () => void;
 }
 
 export const MainPanel: React.FC<MainPanelProps> = ({
@@ -17,15 +18,24 @@ export const MainPanel: React.FC<MainPanelProps> = ({
   onNavigate,
   onOpenFile,
   openModal,
+  onToggleSidebar,
 }) => {
   const currentFolder = breadcrumbs[breadcrumbs.length - 1];
 
   return (
     <div className="flex-1 flex flex-col h-full bg-background overflow-hidden">
       {/* Top Bar / Breadcrumbs */}
-      <div className="flex items-center justify-between p-4 border-b border-border bg-card">
-        <div className="flex items-center text-sm">
-          {breadcrumbs.map((node, index) => (
+      <div className="flex items-center justify-between p-4 border-b border-border bg-card shrink-0 gap-4">
+        <div className="flex items-center text-sm gap-3 overflow-hidden">
+          <button 
+            onClick={onToggleSidebar}
+            className="md:hidden p-1.5 text-muted-foreground hover:bg-muted rounded-md transition-colors shrink-0"
+          >
+            <Menu size={20} />
+          </button>
+          
+          <div className="flex items-center flex-nowrap overflow-x-auto scrollbar-none whitespace-nowrap">
+            {breadcrumbs.map((node, index) => (
             <React.Fragment key={node.id}>
               <button
                 onClick={() => onNavigate(node.id)}
@@ -37,25 +47,28 @@ export const MainPanel: React.FC<MainPanelProps> = ({
                 {node.name}
               </button>
               {index < breadcrumbs.length - 1 && (
-                <ChevronRight size={16} className="mx-1 text-muted-foreground" />
+                <ChevronRight size={16} className="mx-1 text-muted-foreground shrink-0" />
               )}
             </React.Fragment>
           ))}
+          </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 shrink-0">
           <button
             onClick={() => openModal('create', currentFolder.id, 'folder')}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+            className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 text-sm font-medium rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+            title="New Folder"
           >
             <FolderPlus size={16} />
-            New Folder
+            <span className="hidden sm:inline">New Folder</span>
           </button>
           <button
             onClick={() => openModal('create', currentFolder.id, 'text')}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            title="New File"
           >
             <FilePlus size={16} />
-            New File
+            <span className="hidden sm:inline">New File</span>
           </button>
         </div>
       </div>
