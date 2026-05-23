@@ -24,9 +24,12 @@ export const MainPanel: React.FC<MainPanelProps> = ({
 
   return (
     <div className="flex-1 flex flex-col h-full bg-background overflow-hidden">
-      {/* Top Bar / Breadcrumbs */}
+      
+      {/* 1. Top Bar: Contains Breadcrumbs and Action Buttons */}
       <div className="flex items-center justify-between p-4 border-b border-border bg-card shrink-0 gap-4">
         <div className="flex items-center text-sm gap-3 overflow-hidden">
+          
+          {/* Hamburger menu for mobile devices */}
           <button 
             onClick={onToggleSidebar}
             className="md:hidden p-1.5 text-muted-foreground hover:bg-muted rounded-md transition-colors shrink-0"
@@ -73,7 +76,7 @@ export const MainPanel: React.FC<MainPanelProps> = ({
         </div>
       </div>
 
-      {/* Content Area */}
+      {/* 2. Content Area: Displays the files and folders inside the current directory */}
       <div className="flex-1 p-6 overflow-y-auto">
         {childrenNodes.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
@@ -107,11 +110,13 @@ const FileCard: React.FC<{
   const [showMenu, setShowMenu] = React.useState(false);
 
   return (
+    // The FileCard Container
     <div
       className="relative group flex flex-col items-center p-4 rounded-xl border border-transparent hover:border-border hover:bg-muted/50 cursor-pointer transition-all active:scale-95"
       onClick={onClick}
       onMouseLeave={() => setShowMenu(false)}
     >
+      {/* Icon (Folder vs File) */}
       <div className="relative mb-3">
         {node.type === 'folder' ? (
           <Folder size={48} className="text-blue-500 drop-shadow-sm" fill="currentColor" fillOpacity={0.2} />

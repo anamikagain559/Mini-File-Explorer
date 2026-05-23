@@ -9,7 +9,9 @@ interface FileEditorProps {
 }
 
 export const FileEditor: React.FC<FileEditorProps> = ({ file, onSave, onClose }) => {
+  // Local state to hold the text as the user types
   const [content, setContent] = useState(file.content || '');
+  // Track if there are unsaved changes
   const [isSaved, setIsSaved] = useState(true);
 
   useEffect(() => {
@@ -17,14 +19,16 @@ export const FileEditor: React.FC<FileEditorProps> = ({ file, onSave, onClose })
     setIsSaved(true);
   }, [file.id, file.content]);
 
+  // Triggered when user types in the textarea
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
-    setIsSaved(false);
+    setIsSaved(false); // Mark as unsaved
   };
 
+  // Triggered when user clicks the save button
   const handleSave = () => {
-    onSave(file.id, content);
-    setIsSaved(true);
+    onSave(file.id, content); // Call the parent function to save it globally
+    setIsSaved(true);         // Reset the unsaved status
   };
 
   return (
@@ -33,6 +37,8 @@ export const FileEditor: React.FC<FileEditorProps> = ({ file, onSave, onClose })
         <div className="flex items-center gap-2">
           <FileText size={18} className="text-muted-foreground" />
           <span className="font-medium text-foreground">{file.name}</span>
+          
+          {/* Show a small dot indicator if the file has unsaved changes */}
           {!isSaved && <span className="w-2 h-2 rounded-full bg-primary" title="Unsaved changes"></span>}
         </div>
         <div className="flex items-center gap-2">

@@ -13,9 +13,12 @@ const initialData: FileSystemNode[] = [
 ];
 
 export const useFileSystem = () => {
+  // nodes stores all our files and folders in a single flat array
   const [nodes, setNodes] = useState<FileSystemNode[]>([]);
+  // isLoaded ensures we don't save to localStorage before we've loaded from it
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Load data from localStorage on initial render
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -30,6 +33,7 @@ export const useFileSystem = () => {
     setIsLoaded(true);
   }, []);
 
+  // Save data to localStorage whenever `nodes` changes
   useEffect(() => {
     if (isLoaded) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(nodes));
@@ -38,6 +42,7 @@ export const useFileSystem = () => {
 
   const generateId = () => Math.random().toString(36).substr(2, 9);
 
+  // Creates a new folder or text file and adds it to the array
   const createNode = useCallback((name: string, type: FileType, parentId: string) => {
     const newNode: FileSystemNode = {
       id: generateId(),
@@ -46,6 +51,7 @@ export const useFileSystem = () => {
       parentId,
       ...(type === 'text' ? { content: '' } : {}),
     };
+    // Use the spread operator to create a new array with the new node at the end
     setNodes((prev) => [...prev, newNode]);
     return newNode.id;
   }, []);
@@ -54,11 +60,12 @@ export const useFileSystem = () => {
     setNodes((prev) => prev.map((node) => (node.id === id ? { ...node, name: newName } : node)));
   }, []);
 
+  // Recursively deletes a folder and all its contents
   const deleteNode = useCallback((id: string) => {
     setNodes((prev) => {
-    
       const idsToDelete = new Set<string>([id]);
       
+      // Find all nested children to delete
       let currentSize = 0;
       while (idsToDelete.size > currentSize) {
         currentSize = idsToDelete.size;
@@ -69,6 +76,7 @@ export const useFileSystem = () => {
         });
       }
 
+      // Filter out any nodes whose IDs are in our deletion set
       return prev.filter((node) => !idsToDelete.has(node.id));
     });
   }, []);

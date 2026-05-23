@@ -9,6 +9,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
+// 1. Base Modal Component: Acts as the wrapper/backdrop for other specific modals
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
 
@@ -32,6 +33,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }
   );
 };
 
+// 2. Input Modal: Used for taking text input (Create new file/folder, Rename)
 export const InputModal: React.FC<{
   isOpen: boolean;
   onClose: () => void;
@@ -43,17 +45,19 @@ export const InputModal: React.FC<{
 }> = ({ isOpen, onClose, onSubmit, title, initialValue = '', placeholder = '', submitLabel = 'Submit' }) => {
   const [value, setValue] = useState(initialValue);
 
+  // Synchronize the local input value when the modal opens or initialValue changes
   useEffect(() => {
     if (isOpen) {
       setValue(initialValue);
     }
   }, [isOpen, initialValue]);
 
+  // Handle form submission to prevent page reload and validate input
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (value.trim()) {
-      onSubmit(value.trim());
-      onClose();
+      onSubmit(value.trim()); // Send the clean value to the parent
+      onClose();              // Close the modal
     }
   };
 
@@ -89,6 +93,7 @@ export const InputModal: React.FC<{
   );
 };
 
+// 3. Confirm Modal: Used for dangerous actions (like Delete) requiring yes/no confirmation
 export const ConfirmModal: React.FC<{
   isOpen: boolean;
   onClose: () => void;

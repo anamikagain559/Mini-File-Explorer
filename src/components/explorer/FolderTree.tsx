@@ -18,7 +18,9 @@ export const FolderTree: React.FC<FolderTreeProps> = ({
   onSelect,
   level = 0
 }) => {
+  // 1. Filter out only the children that belong to this specific parentId
   const children = nodes.filter(node => node.parentId === parentId);
+  // 2. We only want to display folders in the sidebar tree
   const folders = children.filter(node => node.type === 'folder');
 
   if (folders.length === 0) return null;
@@ -58,11 +60,12 @@ const FolderNode: React.FC<{
   };
   
   const [isOpen, setIsOpen] = useState(() => {
-    // Auto expand 'root' by default or if it contains the selected item
+    // Auto expand 'root' by default or if this folder contains the selected item
     if (folder.id === 'root') return true;
     return containsSelected(folder.id, currentFolderId);
   });
 
+  // Check if this folder has any sub-folders to show the expand arrow
   const hasChildren = nodes.some(n => n.parentId === folder.id && n.type === 'folder');
 
   return (
@@ -92,6 +95,8 @@ const FolderNode: React.FC<{
         <span className="truncate">{folder.name}</span>
       </div>
       
+      {/* RECURSION: If this folder is open and has sub-folders, 
+          it calls <FolderTree> again inside itself! */}
       {isOpen && hasChildren && (
         <FolderTree 
           nodes={nodes} 
