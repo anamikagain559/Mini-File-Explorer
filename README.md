@@ -2,7 +2,6 @@
 
 A fully responsive, hierarchical file manager built with **React**, **TypeScript**, and **Tailwind CSS**. This application mimics a basic desktop file explorer, allowing users to create, rename, and delete files and folders using a clean, modern UI.
 
-![Mini File Explorer UI](https://via.placeholder.com/800x400?text=Mini+File+Explorer)
 
 ## 🌐 Live Demo
 **[Click here to view the live application](https://mini-file-explorer-three.vercel.app/)**
@@ -40,7 +39,7 @@ If you want to run this project on your local machine, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/mini-file-explorer.git
+   git clone https://github.com/anamikagain559/Mini-File-Explorer.git
    cd mini-file-explorer
    ```
 
