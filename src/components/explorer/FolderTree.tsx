@@ -48,11 +48,9 @@ const FolderNode: React.FC<{
   onSelect: (id: string) => void;
   level: number;
 }> = ({ folder, nodes, currentFolderId, onSelect, level }) => {
-  // Check if currentFolderId or its descendants are within this folder
-  // If so, we might want to auto-expand, but for simplicity we'll just track basic state
+
   const isSelected = currentFolderId === folder.id;
-  
-  // Find if this folder contains the selected folder to auto-expand
+
   const containsSelected = (folderId: string, targetId: string): boolean => {
     if (folderId === targetId) return true;
     const children = nodes.filter(n => n.parentId === folderId);

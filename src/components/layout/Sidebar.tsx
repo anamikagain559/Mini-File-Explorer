@@ -15,18 +15,12 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ nodes, currentFolderId, onSelectFolder, isOpen, onClose }) => {
   return (
     <>
-      {/* 1. Mobile overlay (Dark background when sidebar is open on small screens) */}
       {isOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-30 md:hidden backdrop-blur-sm" 
           onClick={onClose}
         />
       )}
-      
-      {/* 2. Sidebar Container: 
-          - fixed on mobile (slides in/out via translate-x)
-          - static on desktop (always visible)
-      */}
       <div className={cn(
         "fixed md:static inset-y-0 left-0 z-40 w-64 h-full bg-card border-r border-border flex flex-col flex-shrink-0 transition-transform duration-300 ease-in-out md:translate-x-0",
         isOpen ? "translate-x-0" : "-translate-x-full"
@@ -47,7 +41,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ nodes, currentFolderId, onSele
           Folders
         </div>
         
-        {/* 3. Render the recursive tree starting from the root (parentId = null) */}
         <FolderTree 
           nodes={nodes} 
           parentId={null} 
