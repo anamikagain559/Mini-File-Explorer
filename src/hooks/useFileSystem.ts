@@ -13,9 +13,8 @@ const initialData: FileSystemNode[] = [
 ];
 
 export const useFileSystem = () => {
-  // nodes stores all our files and folders in a single flat array
+
   const [nodes, setNodes] = useState<FileSystemNode[]>([]);
-  // isLoaded ensures we don't save to localStorage before we've loaded from it
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Load data from localStorage on initial render
