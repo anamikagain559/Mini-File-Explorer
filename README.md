@@ -1,73 +1,78 @@
-# React + TypeScript + Vite
+# Mini File Explorer 📁
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully responsive, hierarchical file manager built with **React**, **TypeScript**, and **Tailwind CSS**. This application mimics a basic desktop file explorer, allowing users to create, rename, and delete files and folders using a clean, modern UI.
 
-Currently, two official plugins are available:
+![Mini File Explorer UI](https://via.placeholder.com/800x400?text=Mini+File+Explorer)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌐 Live Demo
+**[Click here to view the live application](https://mini-file-explorer-three.vercel.app/)**
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+* **Hierarchical Structure:** Manage deeply nested folders and files just like a real file system.
+* **Core Operations:**
+  * 📁 **Create:** Add new folders or text files inside any directory.
+  * ✏️ **Rename:** Easily update the names of your files and folders.
+  * 🗑️ **Delete:** Remove folders and files. Deleting a folder recursively deletes all of its contents.
+* **Text Editor:** Click on any text file to open an integrated editor. Type, edit, and save your content directly in the browser!
+* **Responsive Design:** 
+  * Desktop: Split-pane view with a persistent sidebar.
+  * Mobile: Collapsible drawer sidebar with touch-friendly menus and a full-screen text editor.
+* **State Persistence:** All your files and folders are saved locally using the Browser's `localStorage` so you never lose your data upon refreshing.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* **Framework:** React 19 (via Vite)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS v4
+* **Icons:** Lucide React
+* **State Management:** Custom React Hooks (`useFileSystem`) + LocalStorage
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🚀 Running Locally
+
+If you want to run this project on your local machine, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/mini-file-explorer.git
+   cd mini-file-explorer
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser:**
+   Navigate to `http://localhost:5173` to see the application running.
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+├── components/
+│   ├── explorer/     # FolderTree, FileEditor components
+│   ├── layout/       # Sidebar, MainPanel wrappers
+│   └── shared/       # Reusable UI like Modals
+├── hooks/            
+│   └── useFileSystem.ts # Core logic & LocalStorage persistence
+├── pages/
+│   └── ExplorerPage.tsx # Main smart container component
+└── types/            # TypeScript interfaces
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+*Developed for the Webbly Media assignment / NEXT Level Course.*
