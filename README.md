@@ -73,5 +73,4 @@ src/
 └── types/            # TypeScript interfaces
 ```
 
----
-*Developed for the Webbly Media assignment / NEXT Level Course.*
+
