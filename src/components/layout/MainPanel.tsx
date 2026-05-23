@@ -63,7 +63,7 @@ export const MainPanel: React.FC<MainPanelProps> = ({
             title="New Folder"
           >
             <FolderPlus size={16} />
-            <span className="hidden sm:inline">New Folder</span>
+            <span className="hidden sm:inline">AddNew Folder</span>
           </button>
           <button
             onClick={() => openModal('create', currentFolder.id, 'text')}
@@ -71,7 +71,7 @@ export const MainPanel: React.FC<MainPanelProps> = ({
             title="New File"
           >
             <FilePlus size={16} />
-            <span className="hidden sm:inline">New File</span>
+            <span className="hidden sm:inline">Add New File</span>
           </button>
         </div>
       </div>
@@ -110,9 +110,8 @@ const FileCard: React.FC<{
   const [showMenu, setShowMenu] = React.useState(false);
 
   return (
-    // The FileCard Container
     <div
-      className="relative group flex flex-col items-center p-4 rounded-xl border border-transparent hover:border-border hover:bg-muted/50 cursor-pointer transition-all active:scale-95"
+      className="relative group flex flex-col items-center p-4 rounded-xl border border-border bg-muted/30 md:border-transparent md:bg-transparent hover:border-border hover:bg-muted/50 active:bg-muted/50 cursor-pointer transition-all active:scale-95"
       onClick={onClick}
       onMouseLeave={() => setShowMenu(false)}
     >
@@ -136,7 +135,7 @@ const FileCard: React.FC<{
         }}
         className={cn(
           "absolute top-2 right-2 p-1.5 rounded-md hover:bg-background/80 text-muted-foreground backdrop-blur-sm transition-opacity",
-          showMenu ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+          showMenu ? "opacity-100" : "opacity-100 md:opacity-0 md:group-hover:opacity-100"
         )}
       >
         <MoreVertical size={16} />
